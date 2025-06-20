@@ -1,0 +1,2 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"poexsa_prada_pim_line_user","poexsa_prada_pim_line_user","prada.model_prada_pim_line","mrp_plm.group_plm_user",1,1,1,1

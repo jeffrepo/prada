@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="prada_pim_line_tree" model="ir.ui.view">
+            <field name="name">prada.pim.line.list</field>
+            <field name="model">prada.pim.line</field>
+            <field name="arch" type="xml">
+                <field name="temp"/>
+                <field name="proveedor_id"/>
+            </field>
+        </record>
+
+        <record id="view_prada_pim_line_form" model="ir.ui.view">
+            <field name="name">prada.pim.line.form</field>
+            <field name="model">prada.pim.line</field>
+            <field name="arch" type="xml">
+                <form string="PIM linea" class="o_sale_order">
+                    <field name="temp"/>
+                    <field name="proveedor_id"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_plm_pim_filter" model="ir.ui.view">
+            <field name="name">prada.pim.line.list.select</field>
+            <field name="model">prada.pim.line</field>
+            <field name="arch" type="xml">
+                <search string="Search plm pim linea">
+                    <field name="temp" string="Temprada de articulo"/>
+                    <field name="proveedor_id" string="Proveedor"/>
+                    <field name="marca" string="Marca"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_pim_linea" model="ir.actions.act_window">
+            <field name="name">PIM Lineas</field>
+            <field name="res_model">prada.pim.line</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_plm_pim_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+            
+        <menuitem  id="menu_prada_pim_line" action="action_pim_linea" parent="mrp_plm.menu_mrp_plm_root" string="PIM lineas" sequence="100"/>
+    </data>
+</odoo>
