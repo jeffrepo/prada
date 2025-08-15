@@ -6,8 +6,85 @@
             <field name="name">prada.pim.line.list</field>
             <field name="model">prada.pim.line</field>
             <field name="arch" type="xml">
-                <field name="temp"/>
-                <field name="proveedor_id"/>
+                <list create="0">
+                    <field name="prada_image" widget="image" readonly="0"/>
+                    <field name="temp" optional="show"/>
+                    <field name="proveedor_id" optional="show"/>
+                    <field name="marca_id" optional="show"/>
+                    <field name="codigo_prada" optional="show"/>
+                    <field name="modelo" optional="show"/>
+                    <field name="departamento_id" optional="show"/>
+                    <field name="seccion_id" optional="show"/>
+                    <field name="silueta_id" optional="show"/>
+
+                    <field name="horma" optional="show"/>
+                    <field name="material_id" optional="show"/>
+                    <field name="color_id" optional="show"/>
+                    <field name="atributo1_id" optional="show"/>
+                    <field name="atributo2_id" optional="show"/>
+                    <field name="ocasion_id" optional="show"/>
+                    <field name="no_juego" optional="show"/>
+                    <field name="juego1" optional="show"/>
+                    <field name="juego2" optional="show"/>
+                    <field name="juego3" optional="show"/>
+                    <field name="categoria_id" optional="show"/>
+                    <field name="tendencia_id" optional="show"/>
+                    <field name="coleccion_id" optional="show"/>
+                    <field name="tienda_id" optional="show"/>
+                    <field name="costo" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion" optional="show"/>
+                    <field name="corridas_prepedido" optional="show"/>
+                    <field name="corrida" optional="show"/>
+                    <field name="talla" optional="show"/>
+                    <field name="columna1" optional="show"/>
+                    <field name="columna2" optional="show"/>
+                    <field name="columna3" optional="show"/>
+                    <field name="columna4" optional="show"/>
+                    <field name="columna5" optional="show"/>
+                    <field name="columna6" optional="show"/>
+                    <field name="columna7" optional="show"/>
+                    <field name="columna8" optional="show"/>
+                    <field name="columna9" optional="show"/>
+                    <field name="columna10" optional="show"/>
+                    <field name="columna11" optional="show"/>
+                    <field name="totalu" optional="show"/>
+                    <field name="total_eur" optional="show"/>
+                    <field name="gastos" optional="show"/>
+                    <field name="iva" optional="show"/>
+                    <field name="total_usd" optional="show"/>
+                    <field name="pvp_calculado" optional="show"/>
+                    <field name="pvp_redondeado" optional="show"/>
+                    <field name="pvp_comercial" optional="show"/>
+                    <field name="pvp_outlet" optional="show"/>
+                    <field name="comentarios_compras" optional="show"/>
+                    <field name="mes_entrega" optional="show"/>
+                    <field name="mes_recibo_tienda" optional="show"/>
+                    <field name="apuntes_getoria_compra_es" optional="show"/>
+                    <field name="revision_es_antes_vuelo" optional="show"/>
+                    <field name="troquel_id" optional="show"/>
+                    <field name="medidas" optional="show"/>
+                    <field name="tipo_punta" optional="show"/>
+                    <field name="tipo_fijacion" optional="show"/>
+                    <field name="comentarios_producto_compra_es" optional="show"/>
+                    <field name="comentarios_p1_revision_mx" optional="show"/>
+                    <field name="comentarios_p2_revision_mx" optional="show"/>
+                    <field name="comentarios_producto_llegada_mx" optional="show"/>
+                    <field name="cuidados_producto" optional="show"/>
+                    <field name="atributo_especial" optional="show"/>
+                    <field name="estatus_muestra_web_id" optional="show"/>
+                    <field name="estatus_muestra_marketing_id" optional="show"/>
+                    <field name="fecha_vuelo_muestras" optional="show"/>
+                    <field name="estatus_muestra_importaciones" optional="show"/>
+                    <field name="fecha_vuelo_produccion" optional="show"/>
+                    <field name="estatus_produccion_importacion" optional="show"/>
+                    <field name="bullets" optional="show"/>
+                    <field name="titulo" optional="show"/>
+                    <field name="descripcion" optional="show"/>
+                    <field name="metatitulo" optional="show"/>
+                    <field name="metadescripcion" optional="show"/>
+                    <field name="titulo_amazon" optional="show"/>
+                    <field name="desripcion_amazon" optional="show"/>
+                    <field name="bullets_amazon" optional="show"/>
+                </list>
             </field>
         </record>
 
@@ -16,8 +93,92 @@
             <field name="model">prada.pim.line</field>
             <field name="arch" type="xml">
                 <form string="PIM linea" class="o_sale_order">
-                    <field name="temp"/>
-                    <field name="proveedor_id"/>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="producto_id" required="True"/>
+                                <field name="prada_image" widget="image" invisible="not producto_id"/>
+                            </group>
+                            <group>
+                                <field name="temp"/>
+                                <field name="proveedor_id"/>
+                                <field name="marca_id"/>
+                                <field name="codigo_prada"/>
+                                <field name="modelo"/>
+                                <field name="departamento_id"/>
+                                <field name="seccion_id"/>
+                                <field name="silueta_id"/>
+                                
+                                <field name="horma"/>
+                                <field name="material_id"/>
+                                <field name="color_id"/>
+                                <field name="atributo1_id"/>
+                                <field name="atributo2_id"/>
+                                <field name="ocasion_id"/>
+                                <field name="no_juego"/>
+                                <field name="juego1"/>
+                                <field name="juego2"/>
+                                <field name="juego3"/>
+                                <field name="categoria_id"/>
+                                <field name="tendencia_id"/>
+                                <field name="coleccion_id"/>
+                                <field name="tienda_id"/>
+                                <field name="costo" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion" force_save="1"/>
+                                <field name="corridas_prepedido"/>
+                                <field name="corrida"/>
+                                <field name="talla"/>
+                                <field name="columna1"/>
+                                <field name="columna2"/>
+                                <field name="columna3"/>
+                                <field name="columna4"/>
+                                <field name="columna5"/>
+                                <field name="columna6"/>
+                                <field name="columna7"/>
+                                <field name="columna8"/>
+                                <field name="columna9"/>
+                                <field name="columna10"/>
+                                <field name="columna11"/>
+                                <field name="totalu"/>
+                                <field name="total_eur"/>
+                                <field name="gastos"/>
+                                <field name="iva"/>
+                                <field name="total_usd" optional="show"/>
+                                <field name="pvp_calculado" optional="show"/>
+                                <field name="pvp_redondeado" optional="show"/>
+                                <field name="pvp_comercial" optional="show"/>
+                                <field name="pvp_outlet" optional="show"/>
+                                <field name="comentarios_compras" optional="show"/>
+                                <field name="mes_entrega" optional="show"/>
+                                <field name="mes_recibo_tienda" optional="show"/>
+                                <field name="apuntes_getoria_compra_es" optional="show"/>
+                                <field name="revision_es_antes_vuelo" optional="show"/>
+                                <field name="troquel_id" optional="show"/>
+                                <field name="medidas" optional="show"/>
+                                <field name="tipo_punta" optional="show"/>
+                                <field name="tipo_fijacion" optional="show"/>
+                                <field name="comentarios_producto_compra_es" optional="show"/>
+                                <field name="comentarios_p1_revision_mx" optional="show"/>
+                                <field name="comentarios_p2_revision_mx" optional="show"/>
+                                <field name="comentarios_producto_llegada_mx" optional="show"/>
+                                <field name="cuidados_producto" optional="show"/>
+                                <field name="atributo_especial" optional="show"/>
+                                <field name="estatus_muestra_web_id" optional="show"/>
+                                <field name="estatus_muestra_marketing_id" optional="show"/>
+                                <field name="fecha_vuelo_muestras" optional="show"/>
+                                <field name="estatus_muestra_importaciones" optional="show"/>
+                                <field name="fecha_vuelo_produccion" optional="show"/>
+                                <field name="estatus_produccion_importacion" optional="show"/>
+                                <field name="bullets"/>
+                                <field name="titulo" optional="show"/>
+                                <field name="descripcion" optional="show"/>
+                                <field name="metatitulo" optional="show"/>
+                                <field name="metadescripcion" optional="show"/>
+                                <field name="titulo_amazon" optional="show"/>
+                                <field name="desripcion_amazon" optional="show"/>
+                                <field name="bullets_amazon" optional="show"/>
+                            </group>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -29,16 +190,65 @@
                 <search string="Search plm pim linea">
                     <field name="temp" string="Temprada de articulo"/>
                     <field name="proveedor_id" string="Proveedor"/>
-                    <field name="marca" string="Marca"/>
+                    <field name="marca_id" string="Marca"/>
                 </search>
             </field>
         </record>
-
+        
         <record id="action_pim_linea" model="ir.actions.act_window">
             <field name="name">PIM Lineas</field>
             <field name="res_model">prada.pim.line</field>
             <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="view_prada_plm_pim_filter"/>
+            <field name="context">{'disable_manual_create': True}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_temp_tree" model="ir.ui.view">
+            <field name="name">prada.temp.list</field>
+            <field name="model">prada.temp</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_temp_form" model="ir.ui.view">
+            <field name="name">prada.temp.form</field>
+            <field name="model">prada.temp</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_temp_filter" model="ir.ui.view">
+            <field name="name">prada.temp.select</field>
+            <field name="model">prada.temp</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_temp" model="ir.actions.act_window">
+            <field name="name">TEMP</field>
+            <field name="res_model">prada.temp</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_temp_filter"/>
             <field name="context">{}</field>
             <!-- <field name="path"></field>
             <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
@@ -48,7 +258,1035 @@
                 </p>
             </field>
         </record>
-            
-        <menuitem  id="menu_prada_pim_line" action="action_pim_linea" parent="mrp_plm.menu_mrp_plm_root" string="PIM lineas" sequence="100"/>
+
+
+        <record id="prada_marca_tree" model="ir.ui.view">
+            <field name="name">prada.marca.list</field>
+            <field name="model">prada.marca</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_temp_form" model="ir.ui.view">
+            <field name="name">prada.temp.form</field>
+            <field name="model">prada.marca</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="clave"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_marca_filter" model="ir.ui.view">
+            <field name="name">prada.marca.select</field>
+            <field name="model">prada.marca</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="clave"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_marca" model="ir.actions.act_window">
+            <field name="name">MARCA</field>
+            <field name="res_model">prada.marca</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_marca_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+
+        <record id="prada_departamento_tree" model="ir.ui.view">
+            <field name="name">prada.departamento.list</field>
+            <field name="model">prada.departamento</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_departamento_form" model="ir.ui.view">
+            <field name="name">prada.departamento.form</field>
+            <field name="model">prada.departamento</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="clave"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_departamento_filter" model="ir.ui.view">
+            <field name="name">prada.departamento.select</field>
+            <field name="model">prada.departamento</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="clave"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_pim_departamento" model="ir.actions.act_window">
+            <field name="name">DEPARTAMENTO</field>
+            <field name="res_model">prada.departamento</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_departamento_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_seccion_tree" model="ir.ui.view">
+            <field name="name">prada.seccion.list</field>
+            <field name="model">prada.seccion</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_seccion_form" model="ir.ui.view">
+            <field name="name">prada.seccion.form</field>
+            <field name="model">prada.seccion</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="clave"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_seccion_filter" model="ir.ui.view">
+            <field name="name">prada.seccion.select</field>
+            <field name="model">prada.seccion</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="clave"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_seccion" model="ir.actions.act_window">
+            <field name="name">SECCION</field>
+            <field name="res_model">prada.seccion</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_seccion_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_silueta_tree" model="ir.ui.view">
+            <field name="name">prada.silueta.list</field>
+            <field name="model">prada.silueta</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_silueta_form" model="ir.ui.view">
+            <field name="name">prada.silueta.form</field>
+            <field name="model">prada.silueta</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="clave"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_silueta_filter" model="ir.ui.view">
+            <field name="name">prada.silueta.select</field>
+            <field name="model">prada.silueta</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_silueta" model="ir.actions.act_window">
+            <field name="name">SILUETA</field>
+            <field name="res_model">prada.silueta</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_silueta_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_horma_tree" model="ir.ui.view">
+            <field name="name">prada.horma.list</field>
+            <field name="model">prada.horma</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_horma_form" model="ir.ui.view">
+            <field name="name">prada.horma.form</field>
+            <field name="model">prada.horma</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_horma_filter" model="ir.ui.view">
+            <field name="name">prada.horma.select</field>
+            <field name="model">prada.horma</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_horma" model="ir.actions.act_window">
+            <field name="name">HORMA</field>
+            <field name="res_model">prada.horma</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_horma_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_material_tree" model="ir.ui.view">
+            <field name="name">prada.material.list</field>
+            <field name="model">prada.material</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_material_form" model="ir.ui.view">
+            <field name="name">prada.material.form</field>
+            <field name="model">prada.material</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_material_filter" model="ir.ui.view">
+            <field name="name">prada.material.select</field>
+            <field name="model">prada.material</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_material" model="ir.actions.act_window">
+            <field name="name">MATERIAL</field>
+            <field name="res_model">prada.material</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_material_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_color_tree" model="ir.ui.view">
+            <field name="name">prada.color.list</field>
+            <field name="model">prada.color</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_color_form" model="ir.ui.view">
+            <field name="name">prada.color.form</field>
+            <field name="model">prada.color</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_color_filter" model="ir.ui.view">
+            <field name="name">prada.color.select</field>
+            <field name="model">prada.color</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_color" model="ir.actions.act_window">
+            <field name="name">COLOR</field>
+            <field name="res_model">prada.color</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_color_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_atributo1_tree" model="ir.ui.view">
+            <field name="name">prada.atributo1.list</field>
+            <field name="model">prada.atributo1</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_atributo1_form" model="ir.ui.view">
+            <field name="name">prada.atributo1.form</field>
+            <field name="model">prada.atributo1</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_atributo1_filter" model="ir.ui.view">
+            <field name="name">prada.atributo1.select</field>
+            <field name="model">prada.atributo1</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_atributo1" model="ir.actions.act_window">
+            <field name="name">ATRIBUTO1</field>
+            <field name="res_model">prada.atributo1</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_atributo1_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_atributo2_tree" model="ir.ui.view">
+            <field name="name">prada.atributo2.list</field>
+            <field name="model">prada.atributo2</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_atributo2_form" model="ir.ui.view">
+            <field name="name">prada.atributo2.form</field>
+            <field name="model">prada.atributo2</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_atributo2_filter" model="ir.ui.view">
+            <field name="name">prada.atributo2.select</field>
+            <field name="model">prada.atributo2</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_atributo2" model="ir.actions.act_window">
+            <field name="name">ATRIBUTO2</field>
+            <field name="res_model">prada.atributo2</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_atributo2_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_ocasion_tree" model="ir.ui.view">
+            <field name="name">prada.ocasion.list</field>
+            <field name="model">prada.ocasion</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_ocasion_form" model="ir.ui.view">
+            <field name="name">prada.ocasion.form</field>
+            <field name="model">prada.ocasion</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_ocasion_filter" model="ir.ui.view">
+            <field name="name">prada.ocasion.select</field>
+            <field name="model">prada.ocasion</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_ocasion" model="ir.actions.act_window">
+            <field name="name">OCASION</field>
+            <field name="res_model">prada.ocasion</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_ocasion_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_categoria_tree" model="ir.ui.view">
+            <field name="name">prada.categoria.list</field>
+            <field name="model">prada.categoria</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_categoria_form" model="ir.ui.view">
+            <field name="name">prada.categoria.form</field>
+            <field name="model">prada.categoria</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_categoria_filter" model="ir.ui.view">
+            <field name="name">prada.categoria.select</field>
+            <field name="model">prada.categoria</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_categoria" model="ir.actions.act_window">
+            <field name="name">CATEGORIA</field>
+            <field name="res_model">prada.categoria</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_categoria_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_tendencia_tree" model="ir.ui.view">
+            <field name="name">prada.tendencia.list</field>
+            <field name="model">prada.tendencia</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_tendencia_form" model="ir.ui.view">
+            <field name="name">prada.tendencia.form</field>
+            <field name="model">prada.tendencia</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_tendencia_filter" model="ir.ui.view">
+            <field name="name">prada.tendencia.select</field>
+            <field name="model">prada.tendencia</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_tendencia" model="ir.actions.act_window">
+            <field name="name">TENDENCIA</field>
+            <field name="res_model">prada.tendencia</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_tendencia_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_coleccion_tree" model="ir.ui.view">
+            <field name="name">prada.coleccion.list</field>
+            <field name="model">prada.coleccion</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_coleccion_form" model="ir.ui.view">
+            <field name="name">prada.coleccion.form</field>
+            <field name="model">prada.coleccion</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_coleccion_filter" model="ir.ui.view">
+            <field name="name">prada.coleccion.select</field>
+            <field name="model">prada.coleccion</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="clave"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_coleccion" model="ir.actions.act_window">
+            <field name="name">COLECCION</field>
+            <field name="res_model">prada.coleccion</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_coleccion_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_tienda_tree" model="ir.ui.view">
+            <field name="name">prada.tienda.list</field>
+            <field name="model">prada.tienda</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_tienda_form" model="ir.ui.view">
+            <field name="name">prada.tienda.form</field>
+            <field name="model">prada.tienda</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_tienda_filter" model="ir.ui.view">
+            <field name="name">prada.tienda.select</field>
+            <field name="model">prada.tienda</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_tienda" model="ir.actions.act_window">
+            <field name="name">TIENDA</field>
+            <field name="res_model">prada.tienda</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_tienda_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva linea
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_corrida_tree" model="ir.ui.view">
+            <field name="name">prada.corrida.list</field>
+            <field name="model">prada.corrida</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="seccion_id"/>
+                    <field name="coleccion_id"/>
+                    <field name="departamento_id"/>
+                    <field name="talla"/>
+                    <field name="columna1" optional="show"/>
+                    <field name="columna2" optional="show"/>
+                    <field name="columna3" optional="show"/>
+                    <field name="columna4" optional="show"/>
+                    <field name="columna5" optional="show"/>
+                    <field name="columna6" optional="show"/>
+                    <field name="columna7" optional="show"/>
+                    <field name="columna8" optional="show"/>
+                    <field name="columna9" optional="show"/>
+                    <field name="columna10" optional="show"/>
+                    <field name="columna11" optional="show"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="view_prada_corrida_form" model="ir.ui.view">
+            <field name="name">prada.corrida.form</field>
+            <field name="model">prada.corrida</field>
+            <field name="arch" type="xml">
+                <form string="Corridas" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="coleccion_id"/>
+                                <field name="seccion_id"/>
+                                <field name="departamento_id"/>
+                            </group>
+                            <group>
+                                <field name="talla"/>
+                                <field name="columna1"/>
+                                <field name="columna2"/>
+                                <field name="columna3"/>
+                                <field name="columna4"/>
+                                <field name="columna5"/>
+                                <field name="columna6"/>
+                                <field name="columna7"/>
+                                <field name="columna8"/>
+                                <field name="columna9"/>
+                                <field name="columna10"/>
+                                <field name="columna11"/>
+                                <field name="totalu"/>
+                                <field name="total" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_prada_corrida_filter" model="ir.ui.view">
+            <field name="name">prada.corrida.select</field>
+            <field name="model">prada.corrida</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_pim_corrida" model="ir.actions.act_window">
+            <field name="name">CATALOGO CORRIDAS</field>
+            <field name="res_model">prada.corrida</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_corrida_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear una nueva corrida
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_troquel_tree" model="ir.ui.view">
+            <field name="name">prada.troquel.list</field>
+            <field name="model">prada.troquel</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_troquel_form" model="ir.ui.view">
+            <field name="name">prada.troquel.form</field>
+            <field name="model">prada.troquel</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_prada_troquel_filter" model="ir.ui.view">
+            <field name="name">prada.troquel.select</field>
+            <field name="model">prada.troquel</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_troquel" model="ir.actions.act_window">
+            <field name="name">TROQUEL</field>
+            <field name="res_model">prada.troquel</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_troquel_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear nuevo objeto
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_estado_web_tree" model="ir.ui.view">
+            <field name="name">prada.estado_web.list</field>
+            <field name="model">prada.estado_web</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_estado_web_form" model="ir.ui.view">
+            <field name="name">prada.estado_web.form</field>
+            <field name="model">prada.estado_web</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_prada_estado_web_filter" model="ir.ui.view">
+            <field name="name">prada.estado_web.select</field>
+            <field name="model">prada.estado_web</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_estado_web" model="ir.actions.act_window">
+            <field name="name">ESTATUS DE LA MUESTRA WEB</field>
+            <field name="res_model">prada.estado_web</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_estado_web_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear nuevo objeto
+                </p>
+            </field>
+        </record>
+
+        <record id="prada_estado_marketing_tree" model="ir.ui.view">
+            <field name="name">prada.estado_marketing.list</field>
+            <field name="model">prada.estado_marketing</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_estado_marketing_form" model="ir.ui.view">
+            <field name="name">prada.estado_marketing.form</field>
+            <field name="model">prada.estado_marketing</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_prada_estado_marketing_filter" model="ir.ui.view">
+            <field name="name">prada.estado_marketing.select</field>
+            <field name="model">prada.estado_marketing</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_estado_marketing" model="ir.actions.act_window">
+            <field name="name">ESTATUS MUESTRA MARKETING</field>
+            <field name="res_model">prada.estado_marketing</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_estado_marketing_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear nuevo objeto
+                </p>
+            </field>
+        </record>
+
+
+        <record id="prada_proveedor_tree" model="ir.ui.view">
+            <field name="name">prada.proveedor.list</field>
+            <field name="model">prada.proveedor</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="clave"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="view_prada_proveedor_form" model="ir.ui.view">
+            <field name="name">prada.proveedor.form</field>
+            <field name="model">prada.proveedor</field>
+            <field name="arch" type="xml">
+                <form string="PIM" class="o_sale_order">
+                    <sheet>
+                        <group>
+                            <field name="clave"/>
+                            <field name="name"/>
+                            <field name="marca_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_prada_proveedor_filter" model="ir.ui.view">
+            <field name="name">prada.proveedor.select</field>
+            <field name="model">prada.proveedor</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_pim_proveedor" model="ir.actions.act_window">
+            <field name="name">PROVEEDORES</field>
+            <field name="res_model">prada.proveedor</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_prada_proveedor_filter"/>
+            <field name="context">{}</field>
+            <!-- <field name="path"></field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear un proveedor
+                </p>
+            </field>
+        </record>
+        
+        
+        <menuitem  id="menu_prada_pim_line" action="action_pim_linea" parent="mrp_plm.menu_mrp_plm_root" sequence="1"/>
+        <menuitem  id="menu_prada_catalogos" name="Catalogos" parent="mrp_plm.menu_mrp_plm_root" groups="prada.prada_compras_producto" sequence="110"/>
+        <menuitem  id="menu_prada_temp" action="action_pim_temp" parent="menu_prada_catalogos" sequence="101"/>
+        <menuitem  id="menu_prada_marca" action="action_pim_marca" parent="menu_prada_catalogos" sequence="102"/>
+        <menuitem  id="menu_prada_departamento" action="action_pim_departamento" parent="menu_prada_catalogos" sequence="103"/>
+        <menuitem  id="menu_prada_seccion" action="action_pim_seccion" parent="menu_prada_catalogos" sequence="104"/>
+        <menuitem  id="menu_prada_silueta" action="action_pim_silueta" parent="menu_prada_catalogos" sequence="105"/>
+        <!-- <menuitem  id="menu_prada_horma" action="action_pim_horma" parent="menu_prada_catalogos" sequence="106"/> -->
+        <menuitem  id="menu_prada_material" action="action_pim_material" parent="menu_prada_catalogos" sequence="107"/>
+        <menuitem  id="menu_prada_color" action="action_pim_color" parent="menu_prada_catalogos" sequence="108"/>
+        <menuitem  id="menu_prada_atributo1" action="action_pim_atributo1" parent="menu_prada_catalogos" sequence="109"/>
+        <menuitem  id="menu_prada_atributo2" action="action_pim_atributo2" parent="menu_prada_catalogos" sequence="110"/>
+        <menuitem  id="menu_prada_ocasion" action="action_pim_ocasion" parent="menu_prada_catalogos" sequence="111"/>
+        <menuitem  id="menu_prada_categoria" action="action_pim_categoria" parent="menu_prada_catalogos" sequence="112"/>
+        <menuitem  id="menu_prada_tendencia" action="action_pim_tendencia" parent="menu_prada_catalogos" sequence="113"/>
+        <menuitem  id="menu_prada_coleccion" action="action_pim_coleccion" parent="menu_prada_catalogos" sequence="114"/>
+        <menuitem  id="menu_prada_tienda" action="action_pim_tienda" parent="menu_prada_catalogos" sequence="115"/>
+        <menuitem  id="menu_prada_troquel" action="action_pim_troquel" parent="menu_prada_catalogos" sequence="116"/>
+        <menuitem  id="menu_prada_estado_web" action="action_pim_estado_web" parent="menu_prada_catalogos" sequence="117"/>
+        <menuitem  id="menu_prada_estado_martketing" action="action_pim_estado_marketing" parent="menu_prada_catalogos" sequence="118"/>
+
+        <menuitem  id="menu_prada_proveedor" action="action_pim_proveedor" parent="menu_prada_catalogos" sequence="110"/>
+        <menuitem  id="menu_prada_corrida" action="action_pim_corrida" parent="menu_prada_catalogos" sequence="120"/>
+        
     </data>
 </odoo>
+

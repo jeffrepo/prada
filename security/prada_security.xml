@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="prada_dg" model="res.groups">
+        <field name="name">DG</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_gestoria" model="res.groups">
+        <field name="name">GESTORIA</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_marketing" model="res.groups">
+        <field name="name">MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_ecommerce" model="res.groups">
+        <field name="name">E-COMMERCE</field>
+        <field name="comment">Permiso</field>
+    </record>
+    
+    <record id="prada_compras" model="res.groups">
+        <field name="name">COMPRAS</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_compras_importaciones" model="res.groups">
+        <field name="name">COMPRAS/IMPORTACIONES</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_compras_planeacion" model="res.groups">
+        <field name="name">COMPRAS/PLANEACION</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_compras_producto" model="res.groups">
+        <field name="name">COMPRAS/PRODUCTO</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_compras_visual" model="res.groups">
+        <field name="name">COMPRAS/VISUAL</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_operaciones" model="res.groups">
+        <field name="name">OPERACIONES</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_ti" model="res.groups">
+        <field name="name">TI</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <!-- GRUPOS NO FUNCIONALES -->
+    <!-- 
+    <record id="prada_producto_marketing" model="res.groups">
+        <field name="name">PRODUCTO/MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_gestoria_compras" model="res.groups">
+        <field name="name">GESTORIA/COMPRAS</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_importaciones_compras" model="res.groups">
+        <field name="name">IMPORTACIONES/COMPRAS</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+
+    <record id="prada_planeacion" model="res.groups">
+        <field name="name">COPMRAS/PLANEACION</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_planeacion_compras" model="res.groups">
+        <field name="name">PLANEACION/COMPRAS</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_producto_compras" model="res.groups">
+        <field name="name">PRODUCTO/COMPRAS</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_producto_compras_ecommerce" model="res.groups">
+        <field name="name">PRODUCTO/COMPRAS/ECOMMERCE</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_compras_planeacion" model="res.groups">
+        <field name="name">DG/COMPRAS/IMPORTACIONES/PLANEACION</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_compras_marketing" model="res.groups">
+        <field name="name">DG/COMPRAS/PRODUCTO/ECOMMERCE/MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_ecommerce_marketing" model="res.groups">
+        <field name="name">DG/ECOMMERCE/MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_gestoria_planeacion" model="res.groups">
+        <field name="name">DG/GESTORIA/COMPRAS/IMPORTACIONES/PLANEACION</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_gestoria_planeacion_producto" model="res.groups">
+        <field name="name">DG/GESTORIA/COMPRAS/IMPORTACIONES/PLANEACION/PRODUCTO</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_gestoria_impo_ecommerce_producto" model="res.groups">
+        <field name="name">DG/GESTORIA/COMPRAS/IMPORTACIONES/PRODUCTO/ECOMMERCE/MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record>
+
+    <record id="prada_dg_gestoria_producto_ecommerce_marketing" model="res.groups">
+        <field name="name">DG/GESTORIA/COMPRAS/PRODUCTO/ECOMMERCE/MARKETING</field>
+        <field name="comment">Permiso</field>
+    </record> -->
+    
+</odoo>
