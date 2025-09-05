@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="prada_admin" model="res.groups">
+        <field name="name">admin</field>
+        <field name="comment">Permiso admin</field>
+    </record>
+    
     <record id="prada_dg" model="res.groups">
         <field name="name">DG</field>
         <field name="comment">Permiso</field>

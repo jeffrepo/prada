@@ -8,6 +8,10 @@
             <field name="arch" type="xml">
                 <list create="0">
                     <field name="prada_image" widget="image" readonly="0"/>
+                    <field name="total_modelos" optional="show" sum="Promedio modelos"/>
+                    <field name="total_costo_promedio" optional="show" sum="Total costo promedio"/>
+                    <field name="total_corrida_promedio" optional="show" sum="Total corrida"/>
+                    <field name="suma_unidades" optional="show" sum="Suma unidades"/>
                     <field name="temp" optional="show"/>
                     <field name="proveedor_id" optional="show"/>
                     <field name="marca_id" optional="show"/>
@@ -31,9 +35,9 @@
                     <field name="tendencia_id" optional="show"/>
                     <field name="coleccion_id" optional="show"/>
                     <field name="tienda_id" optional="show"/>
-                    <field name="costo" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion" optional="show"/>
+                    <field name="costo" optional="show"/>
                     <field name="corridas_prepedido" optional="show"/>
-                    <field name="corrida" optional="show"/>
+                    <field name="corrida_id" optional="show"/>
                     <field name="talla" optional="show"/>
                     <field name="columna1" optional="show"/>
                     <field name="columna2" optional="show"/>
@@ -45,8 +49,23 @@
                     <field name="columna8" optional="show"/>
                     <field name="columna9" optional="show"/>
                     <field name="columna10" optional="show"/>
+                    
+                    <!-- <field name="columna12" optional="show"/>
+                    <field name="columna13" optional="show"/>
+                    <field name="columna14" optional="show"/>
+                    <field name="columna15" optional="show"/>
+                    <field name="columna16" optional="show"/> -->
+                    <field name="columna17" optional="show"/>
+                    <field name="columna18" optional="show"/>
+                    <field name="columna19" optional="show"/>
+                    <field name="columna20" optional="show"/>
+                    
+                    <field name="columna21" optional="show"/>
                     <field name="columna11" optional="show"/>
-                    <field name="totalu" optional="show"/>
+                    <field name="columna22" optional="show"/>
+                    <field name="columna23" optional="show"/>
+                    
+                    <!-- <field name="totalu" optional="show"/> -->
                     <field name="total_eur" optional="show"/>
                     <field name="gastos" optional="show"/>
                     <field name="iva" optional="show"/>
@@ -87,7 +106,7 @@
                 </list>
             </field>
         </record>
-
+        
         <record id="view_prada_pim_line_form" model="ir.ui.view">
             <field name="name">prada.pim.line.form</field>
             <field name="model">prada.pim.line</field>
@@ -100,88 +119,227 @@
                                 <field name="prada_image" widget="image" invisible="not producto_id"/>
                             </group>
                             <group>
-                                <field name="temp"/>
-                                <field name="proveedor_id"/>
-                                <field name="marca_id"/>
-                                <field name="codigo_prada"/>
-                                <field name="modelo"/>
-                                <field name="departamento_id"/>
-                                <field name="seccion_id"/>
-                                <field name="silueta_id"/>
+                                <field name="temp" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras"/>
+                                <field name="temp" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
                                 
-                                <field name="horma"/>
-                                <field name="material_id"/>
-                                <field name="color_id"/>
-                                <field name="atributo1_id"/>
-                                <field name="atributo2_id"/>
-                                <field name="ocasion_id"/>
-                                <field name="no_juego"/>
-                                <field name="juego1"/>
-                                <field name="juego2"/>
-                                <field name="juego3"/>
-                                <field name="categoria_id"/>
-                                <field name="tendencia_id"/>
-                                <field name="coleccion_id"/>
-                                <field name="tienda_id"/>
-                                <field name="costo" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion" force_save="1"/>
-                                <field name="corridas_prepedido"/>
-                                <field name="corrida"/>
-                                <field name="talla"/>
-                                <field name="columna1"/>
-                                <field name="columna2"/>
-                                <field name="columna3"/>
-                                <field name="columna4"/>
-                                <field name="columna5"/>
-                                <field name="columna6"/>
-                                <field name="columna7"/>
-                                <field name="columna8"/>
-                                <field name="columna9"/>
-                                <field name="columna10"/>
-                                <field name="columna11"/>
-                                <field name="totalu"/>
-                                <field name="total_eur"/>
-                                <field name="gastos"/>
-                                <field name="iva"/>
-                                <field name="total_usd" optional="show"/>
-                                <field name="pvp_calculado" optional="show"/>
-                                <field name="pvp_redondeado" optional="show"/>
-                                <field name="pvp_comercial" optional="show"/>
-                                <field name="pvp_outlet" optional="show"/>
-                                <field name="comentarios_compras" optional="show"/>
-                                <field name="mes_entrega" optional="show"/>
-                                <field name="mes_recibo_tienda" optional="show"/>
-                                <field name="apuntes_getoria_compra_es" optional="show"/>
-                                <field name="revision_es_antes_vuelo" optional="show"/>
-                                <field name="troquel_id" optional="show"/>
-                                <field name="medidas" optional="show"/>
-                                <field name="tipo_punta" optional="show"/>
-                                <field name="tipo_fijacion" optional="show"/>
-                                <field name="comentarios_producto_compra_es" optional="show"/>
-                                <field name="comentarios_p1_revision_mx" optional="show"/>
-                                <field name="comentarios_p2_revision_mx" optional="show"/>
-                                <field name="comentarios_producto_llegada_mx" optional="show"/>
-                                <field name="cuidados_producto" optional="show"/>
-                                <field name="atributo_especial" optional="show"/>
-                                <field name="estatus_muestra_web_id" optional="show"/>
-                                <field name="estatus_muestra_marketing_id" optional="show"/>
-                                <field name="fecha_vuelo_muestras" optional="show"/>
-                                <field name="estatus_muestra_importaciones" optional="show"/>
-                                <field name="fecha_vuelo_produccion" optional="show"/>
-                                <field name="estatus_produccion_importacion" optional="show"/>
-                                <field name="bullets"/>
-                                <field name="titulo" optional="show"/>
-                                <field name="descripcion" optional="show"/>
-                                <field name="metatitulo" optional="show"/>
-                                <field name="metadescripcion" optional="show"/>
-                                <field name="titulo_amazon" optional="show"/>
-                                <field name="desripcion_amazon" optional="show"/>
-                                <field name="bullets_amazon" optional="show"/>
+                                <field name="proveedor_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="proveedor_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="marca_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="marca_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="codigo_prada" groups="prada.prada_admin,prada.prada_compras_planeacion,prada.prada_admin"/>
+                                <field name="codigo_prada" readonly="1" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_gestoria,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="modelo" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="modelo" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="departamento_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="departamento_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="seccion_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="seccion_id" readonly="1" groups="prada.prada_gestoria,,prada.prada_compras_planeacionprada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="silueta_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="silueta_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="horma" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="horma" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="material_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="material_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="color_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="color_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="atributo1_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="atributo1_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="atributo2_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="atributo2_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="ocasion_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="ocasion_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="no_juego" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="no_juego" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="juego1" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="juego1" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="juego2" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="juego2" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="juego3" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="juego3" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="categoria_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="categoria_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="tendencia_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="tendencia_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="coleccion_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="coleccion_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="tienda_id" groups="prada.prada_admin,prada.prada_compras_producto,prada.prada_compras,prada.prada_admin"/>
+                                <field name="tienda_id" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_dg,prada.prada_marketing,prada.prada_ecommerce,prada.prada_compras_importaciones,prada.prada_compras_visual,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="costo" groups="prada.prada_admin,prada.prada_gestoria,prada.prada_compras,prada.prada_admin"/>
+                                <field name="costo" readonly="1" groups="prada.prada_dg,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_ti" force_save="1"/>
+                                
+                                <field name="corridas_prepedido" groups="prada.prada_admin,prada.prada_compras,prada.prada_compras_planeacion,prada.prada_admin"/>
+                                <field name="corridas_prepedido" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <field name="corrida_id" groups="prada.prada_admin,prada.prada_compras,prada.prada_compras_planeacion,prada.prada_admin"/>
+                                <field name="corrida_id" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti"/>
+                                
+                                <!-- Campos de solo visualización (NADIE puede editar) -->
+                                <field name="talla" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna1" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna2" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna3" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna4" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna5" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna6" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna7" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna8" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna9" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna10" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+
+                                <!-- <field name="columna12" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna13" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna14" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna15" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna16" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/> -->
+                                <field name="columna17" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna18" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna19" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna20" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna21" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna11" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operations,prada.prada_ti,prada.prada_admin"/>
+                                
+                                
+                                <field name="columna22" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                <field name="columna23" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                
+                                <field name="totalu" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                
+                                <field name="total_eur" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                
+                                <field name="gastos" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti"/>
+                                <field name="gastos" readonly="1" groups="prada.prada_gestoria,prada.prada_admin"/>
+                                
+                                <field name="iva" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti"/>
+                                <field name="iva" readonly="1" groups="prada.prada_gestoria,prada.prada_admin"/>
+                                
+                                <field name="total_usd" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                <field name="total_usd" readonly="1" groups="prada.prada_gestoria,prada.prada_admin" optional="show"/>
+                                
+                                <field name="pvp_calculado" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                <field name="pvp_calculado" readonly="1" groups="prada.prada_gestoria,prada.prada_admin" optional="show"/>
+                                
+                                <field name="pvp_redondeado" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                <field name="pvp_redondeado" readonly="1" groups="prada.prada_gestoria,prada.prada_admin" optional="show"/>
+                                
+                                <field name="pvp_comercial" groups="prada.prada_compras,prada.prada_compras_planeacion,prada.prada_admin" optional="show"/>
+                                <field name="pvp_comercial" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="pvp_outlet" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_planeacion,prada.prada_admin" optional="show"/>
+                                <field name="pvp_outlet" readonly="1" groups="prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="comentarios_compras" groups="prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="comentarios_compras" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="mes_entrega" groups="prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="mes_entrega" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="mes_recibo_tienda" groups="prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="mes_recibo_tienda" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="apuntes_getoria_compra_es" groups="prada.prada_gestoria,prada.prada_admin" optional="show"/>
+                                <field name="apuntes_getoria_compra_es" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="revision_es_antes_vuelo" groups="prada.prada_gestoria,prada.prada_admin" optional="show"/>
+                                <field name="revision_es_antes_vuelo" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="troquel_id" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="troquel_id" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="medidas" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="medidas" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="tipo_punta" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="tipo_punta" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="tipo_fijacion" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="tipo_fijacion" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="comentarios_producto_compra_es" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="comentarios_producto_compra_es" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="comentarios_p1_revision_mx" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="comentarios_p1_revision_mx" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="comentarios_p2_revision_mx" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="comentarios_p2_revision_mx" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="comentarios_producto_llegada_mx" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="comentarios_producto_llegada_mx" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="cuidados_producto" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="cuidados_producto" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="atributo_especial" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="atributo_especial" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+    
+                                <field name="estatus_muestra_web_id" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_ecommerce,prada.prada_admin" optional="show"/>
+                                <field name="estatus_muestra_web_id" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="estatus_muestra_marketing_id" groups="prada.prada_compras_producto,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="estatus_muestra_marketing_id" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="fecha_vuelo_muestras" groups="prada.prada_compras_importaciones,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="fecha_vuelo_muestras" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="estatus_muestra_importaciones" groups="prada.prada_compras_importaciones,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="estatus_muestra_importaciones" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="fecha_vuelo_produccion" groups="prada.prada_compras_importaciones,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="fecha_vuelo_produccion" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="estatus_produccion_importacion" groups="prada.prada_compras_importaciones,prada.prada_compras,prada.prada_admin" optional="show"/>
+                                <field name="estatus_produccion_importacion" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="bullets" readonly="1" groups="prada.prada_dg,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_marketing,prada.prada_operaciones,prada.prada_ti,prada.prada_admin"/>
+                                
+                                <field name="titulo" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="titulo" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="descripcion" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="descripcion" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="metatitulo" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="metatitulo" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="metadescripcion" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="metadescripcion" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="titulo_amazon" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="titulo_amazon" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="desripcion_amazon" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="desripcion_amazon" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
+                                
+                                <field name="bullets_amazon" groups="prada.prada_marketing,prada.prada_admin" optional="show"/>
+                                <field name="bullets_amazon" readonly="1" groups="prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion,prada.prada_compras_producto,prada.prada_compras_visual,prada.prada_ecommerce,prada.prada_operaciones,prada.prada_ti" optional="show"/>
                             </group>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
+
 
         <record id="view_prada_plm_pim_filter" model="ir.ui.view">
             <field name="name">prada.pim.line.list.select</field>
@@ -278,8 +436,8 @@
                 <form string="PIM" class="o_sale_order">
                     <sheet>
                         <group>
-                            <field name="name"/>
                             <field name="clave"/>
+                            <field name="name"/>
                         </group>
                     </sheet>
                 </form>
@@ -982,10 +1140,11 @@
             <field name="model">prada.corrida</field>
             <field name="arch" type="xml">
                 <list>
+                    <field name="temp"/>
                     <field name="name"/>
+                    <field name="departamento_id"/>
                     <field name="seccion_id"/>
                     <field name="coleccion_id"/>
-                    <field name="departamento_id"/>
                     <field name="talla"/>
                     <field name="columna1" optional="show"/>
                     <field name="columna2" optional="show"/>
@@ -997,7 +1156,23 @@
                     <field name="columna8" optional="show"/>
                     <field name="columna9" optional="show"/>
                     <field name="columna10" optional="show"/>
+                    
+                    <!-- <field name="columna12" optional="show"/>
+                    <field name="columna13" optional="show"/>
+                    <field name="columna14" optional="show"/>
+                    <field name="columna15" optional="show"/>
+                    <field name="columna16" optional="show"/> -->
+                    <field name="columna17" optional="show"/>
+                    <field name="columna18" optional="show"/>
+                    <field name="columna19" optional="show"/>
+                    <field name="columna20" optional="show"/>
+                    
+                    <field name="columna21" optional="show"/>
                     <field name="columna11" optional="show"/>
+                    <field name="columna22" optional="show"/>
+                    <field name="columna23" optional="show"/>
+
+                    
                 </list>
             </field>
         </record>
@@ -1010,10 +1185,11 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="temp"/>
                                 <field name="name"/>
-                                <field name="coleccion_id"/>
-                                <field name="seccion_id"/>
                                 <field name="departamento_id"/>
+                                <field name="seccion_id"/>
+                                <field name="coleccion_id"/>
                             </group>
                             <group>
                                 <field name="talla"/>
@@ -1027,8 +1203,22 @@
                                 <field name="columna8"/>
                                 <field name="columna9"/>
                                 <field name="columna10"/>
+                                
+                                <!-- <field name="columna12"/>
+                                <field name="columna13"/>
+                                <field name="columna14"/>
+                                <field name="columna15"/>
+                                <field name="columna16"/> -->
+                                <field name="columna17"/>
+                                <field name="columna18"/>
+                                <field name="columna19"/>
+                                <field name="columna20"/>
+                                
+                                <field name="columna21"/>
                                 <field name="columna11"/>
-                                <field name="totalu"/>
+                                <field name="columna22"/>
+                                <field name="columna23"/>
+                                <!-- <field name="totalu"/> -->
                                 <field name="total" invisible="1"/>
                             </group>
                         </group>
@@ -1264,7 +1454,7 @@
         
         
         <menuitem  id="menu_prada_pim_line" action="action_pim_linea" parent="mrp_plm.menu_mrp_plm_root" sequence="1"/>
-        <menuitem  id="menu_prada_catalogos" name="Catalogos" parent="mrp_plm.menu_mrp_plm_root" groups="prada.prada_compras_producto" sequence="110"/>
+        <menuitem  id="menu_prada_catalogos" name="Catalogos" parent="mrp_plm.menu_mrp_plm_root" groups="prada.prada_compras_producto,prada.prada_admin" sequence="110"/>
         <menuitem  id="menu_prada_temp" action="action_pim_temp" parent="menu_prada_catalogos" sequence="101"/>
         <menuitem  id="menu_prada_marca" action="action_pim_marca" parent="menu_prada_catalogos" sequence="102"/>
         <menuitem  id="menu_prada_departamento" action="action_pim_departamento" parent="menu_prada_catalogos" sequence="103"/>
@@ -1289,4 +1479,3 @@
         
     </data>
 </odoo>
-

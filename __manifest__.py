@@ -20,6 +20,7 @@
         'views/mrp_eco_views.xml',
         'views/prada_views.xml',
         'views/product_template_views.xml',
+        'wizard/mover_prepedido.xml',
         'security/prada_security.xml',
         'security/ir.model.access.csv',
     ],

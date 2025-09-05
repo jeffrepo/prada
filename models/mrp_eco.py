@@ -16,12 +16,12 @@ class MrpEco(models.Model):
 
     #importaciones tambien puede editarlo
 
-    tipo_cambio = fields.Float('Tipo de cambio',digits=(16, 4), compute = '_calcular_tipo_cambio', store = True, readonly = False, groups='prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion')
-    gastos = fields.Float('Gastos (%)', groups='prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion')
-    iva = fields.Float('IVA (%)', groups='prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion')
-    marcaje = fields.Float('Marcaje', groups='prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion')
+    tipo_cambio = fields.Float('Tipo de cambio',digits=(16, 4), compute = '_calcular_tipo_cambio', store = True, readonly = False)
+    gastos = fields.Float('Gastos (%)')
+    iva = fields.Float('IVA (%)')
+    marcaje = fields.Float('Marcaje')
     line_ids = fields.One2many('prada.pim.line','eco_id',string='PIM')
-    fecha = fields.Date('Fecha', default = fields.Date.today(), readonly = False, groups='prada.prada_dg,prada.prada_gestoria,prada.prada_compras,prada.prada_compras_importaciones,prada.prada_compras_planeacion')
+    fecha = fields.Date('Fecha', default = fields.Date.today(), readonly = False)
     total_modelos = fields.Integer('Total modelos', compute='_calcular_totales')
     total_costo_promedio = fields.Float('Total costo promedio', compute='_calcular_totales')
     total_corrida_promedio = fields.Float('Total corrida promedio', compute='_calcular_totales')
@@ -38,8 +38,8 @@ class MrpEco(models.Model):
             for linea in plm.line_ids:
                 total_modelos += 1
                 promedio += linea.costo
-                corrida += linea.corrida
-                suma_unidades += linea.corrida
+                corrida += int(linea.corrida_id.name)
+                suma_unidades += int(linea.corrida_id.name)
     
             plm.total_modelos = total_modelos
             plm.total_costo_promedio = promedio / total_modelos if total_modelos else 0.0

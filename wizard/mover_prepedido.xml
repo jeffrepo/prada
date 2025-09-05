@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+        <record id="prada_move_prepedido_wizard_view" model="ir.ui.view">
+            <field name="name">prada.mover_prepedido.wizard.form</field>
+            <field name="model">mover_prepedido.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Movimiento">
+                    <group>
+                        <field name="prepedido_id"/>
+                    </group>
+                    <footer>
+                        <button name="confirmar" string="Mover prepedidos" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="mover_prepedido_wizard_action" model="ir.actions.act_window">
+            <field name="name">Mover prepedidos</field>
+            <field name="res_model">mover_prepedido.wizard</field>
+            <field name="view_id" ref="prada_move_prepedido_wizard_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Server Action that binds to Action menu -->
+        <record id="action_mover_prepedido_server" model="ir.actions.server">
+            <field name="name">Mover prepedidos</field>
+            <field name="model_id" ref="model_prada_pim_line"/>  <!-- model where Action should appear -->
+            <field name="binding_model_id" ref="model_prada_pim_line"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = env.ref('prada.mover_prepedido_wizard_action').read()[0]
+            </field>
+        </record>
+        
+    </data>
+</odoo>
