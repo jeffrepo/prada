@@ -1323,7 +1323,7 @@
         
         
         <menuitem  id="menu_prada_pim_line" action="action_pim_linea" parent="mrp_plm.menu_mrp_plm_root" sequence="1"/>
-        <menuitem  id="menu_prada_catalogos" name="Catalogos" parent="mrp_plm.menu_mrp_plm_root" groups="prada.prada_compras_producto,prada.prada_admin" sequence="110"/>
+        <menuitem  id="menu_prada_catalogos" name="Catalogos" parent="mrp_plm.menu_mrp_plm_root" sequence="110"/>
         <menuitem  id="menu_prada_temp" action="action_pim_temp" parent="menu_prada_catalogos" sequence="101"/>
         <menuitem  id="menu_prada_marca" action="action_pim_marca" parent="menu_prada_catalogos" sequence="102"/>
         <menuitem  id="menu_prada_departamento" action="action_pim_departamento" parent="menu_prada_catalogos" sequence="103"/>

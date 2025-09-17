@@ -18,9 +18,7 @@
                         <list open_form_view="1">
                             <field name="eco_id" invisible="1" optional="hide"/>
                             <field name="producto_id" required="true"/>
-                            <field name="prada_image" widget="image">
-                                <attribute name="readonly" groups="prada.prada_marketing">0</attribute>
-                            </field>
+                            <field name="prada_image" widget="image"/>
                             <field name="temp" optional="show"/>
                             <field name="proveedor_id" optional="show"/>
                             <field name="marca_id" optional="show"/>
@@ -37,9 +35,7 @@
                             <field name="atributo2_id" optional="show"/>
                             <field name="ocasion_id" optional="show"/>
                             <field name="no_juego" optional="show"/>
-                            <field name="juego1">
-                                <attribute name="readonly" groups="prada.prada_compras_producto">0</attribute>
-                            </field>
+                            <field name="juego1"/>
                             <field name="juego2" optional="show"/>
                             <field name="juego3" optional="show"/>
                             <field name="categoria_id" optional="show"/>
@@ -119,7 +115,7 @@
  
                     </field>
                 </page>
-                <page name="pim_info" string="PIM INFORMACIÓN ADICIONAL" groups="prada.prada_admin,mrp_plm.group_plm_manager">
+                <page name="pim_info" string="PIM INFORMACIÓN ADICIONAL">
                     <group>
                         <field name="fecha"/>
                         <field name="tipo_cambio"/>
