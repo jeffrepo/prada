@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError, AccessError
-import logging
-
-_logger = logging.getLogger(__name__)
+from odoo.exceptions import ValidationError
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -25,6 +22,7 @@ class ResPartner(models.Model):
 class PradaCategoria(models.Model):
     _name = 'prada.proveedor'
     _rec_name = 'clave'
+    _description = 'Proveedor'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -42,6 +40,7 @@ class PradaCategoria(models.Model):
 
 class PradaTemp(models.Model):
     _name = 'prada.temp'
+    _description = 'Temp'
     
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -59,6 +58,7 @@ class PradaTemp(models.Model):
 class PradaMarca(models.Model):
     _name = 'prada.marca'
     _rec_name = 'name'
+    _description = 'Marca'
     
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -87,6 +87,7 @@ class PradaMarca(models.Model):
 class PradaDepartamento(models.Model):
     _name = 'prada.departamento'
     _rec_name = 'clave'
+    _description = 'Departamento'
     
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -115,6 +116,7 @@ class PradaDepartamento(models.Model):
 class PradaSeccion(models.Model):
     _name = 'prada.seccion'
     _rec_name = 'clave'
+    _description = 'Seccion'
     
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -144,6 +146,7 @@ class PradaSeccion(models.Model):
 class PradaSilueta(models.Model):
     _name = 'prada.silueta'
     _rec_name = 'clave'
+    _description = 'Silueta'
 
     name = fields.Char('name')
     clave = fields.Char('Clave')
@@ -171,12 +174,14 @@ class PradaSilueta(models.Model):
 
 class PradaHorma(models.Model):
     _name = 'prada.horma'
+    _description = 'Horma'
 
     name = fields.Char('Nombre')
 
 class PradaMaterial(models.Model):
     _name = 'prada.material'
     _rec_name = 'clave'
+    _description = 'Material'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -205,6 +210,7 @@ class PradaMaterial(models.Model):
 class PradaColor(models.Model):
     _name = 'prada.color'
     _rec_name = 'clave'
+    _description = 'Color'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -233,6 +239,7 @@ class PradaColor(models.Model):
 class PradaAtributo1(models.Model):
     _name = 'prada.atributo1'
     _rec_name = 'clave'
+    _description = 'Atributo1'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -261,6 +268,7 @@ class PradaAtributo1(models.Model):
 class PradaAtributo2(models.Model):
     _name = 'prada.atributo2'
     _rec_name = 'clave'
+    _description = 'Atributo2'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -290,6 +298,7 @@ class PradaAtributo2(models.Model):
 class PradaOcasion(models.Model):
     _name = 'prada.ocasion'
     _rec_name = 'clave'
+    _description = 'Ocasion'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -318,6 +327,7 @@ class PradaOcasion(models.Model):
 class PradaCategoria(models.Model):
     _name = 'prada.categoria'
     _rec_name = 'clave'
+    _description = 'Categoria'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -347,6 +357,7 @@ class PradaCategoria(models.Model):
 class PradaTendencia(models.Model):
     _name = 'prada.tendencia'
     _rec_name = 'clave'
+    _description = 'Tendencia'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -375,6 +386,7 @@ class PradaTendencia(models.Model):
 class PradaColeccion(models.Model):
     _name = 'prada.coleccion'
     _rec_name = 'clave'
+    _description = 'Coleccion'
 
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
@@ -392,6 +404,7 @@ class PradaColeccion(models.Model):
 class PradaTienda(models.Model):
     _name = 'prada.tienda'
     _rec_name = 'clave'
+    _description = 'Tienda'
 
     clave = fields.Char('CLAVE')
     name = fields.Char('NOMBRE')
@@ -408,21 +421,25 @@ class PradaTienda(models.Model):
 
 class PradaTroquel(models.Model):
     _name = 'prada.troquel'
+    _description = 'Troquel'
 
     name = fields.Char('Nombre')
 
 class PradaEstadoWeb(models.Model):
     _name = 'prada.estado_web'
+    _description = 'estado_web'
 
     name = fields.Char('Nombre')
 
 class PradaEstadoMarketing(models.Model):
     _name = 'prada.estado_marketing'
+    _description = 'Marketing'
 
     name = fields.Char('Nombre')
 
 class PradaCorrida(models.Model):
     _name = 'prada.corrida'
+    _description = 'Corrida'
 
     name = fields.Char('CORRIDA', required=True)
 
@@ -455,33 +472,47 @@ class PradaCorrida(models.Model):
     columna23 = fields.Float('MD')
     
     columna11 = fields.Float('UNI')
-    totalu = fields.Float('TotalU', compute='_compute_total')
+    totalu = fields.Float('TotalU', compute='_compute_totalu')
     total = fields.Float('Total',store = True ,compute='_compute_total')
 
-    @api.depends('talla','columna1','columna2','columna3','columna4','columna5','columna6','columna7','columna8','columna9','columna10','columna11')
+    @api.depends(
+        'talla','columna1','columna2','columna3','columna4',
+        'columna5','columna6','columna7','columna8','columna9',
+        'columna10','columna11'
+    )
     def _compute_total(self):
-        total = 0
         for corrida in self:
-            total += corrida.talla + corrida.columna1+corrida.columna2+corrida.columna3+corrida.columna4+corrida.columna5+corrida.columna6+corrida.columna7+corrida.columna8+corrida.columna9+corrida.columna10+corrida.columna11
-            corrida.total = total
-            corrida.totalu = total
+            corrida.total = (
+                (corrida.talla or 0) +
+                (corrida.columna1 or 0) +
+                (corrida.columna2 or 0) +
+                (corrida.columna3 or 0) +
+                (corrida.columna4 or 0) +
+                (corrida.columna5 or 0) +
+                (corrida.columna6 or 0) +
+                (corrida.columna7 or 0) +
+                (corrida.columna8 or 0) +
+                (corrida.columna9 or 0) +
+                (corrida.columna10 or 0) +
+                (corrida.columna11 or 0)
+            )
+
+    @api.depends(
+        'talla','columna1','columna2','columna3','columna4',
+        'columna5','columna6','columna7','columna8','columna9',
+        'columna10','columna11','total'
+    )
+    def _compute_totalu(self):
+        for corrida in self:
+            corrida.totalu = corrida.total
+
 
 
     @api.onchange('seccion_id','departamento_id','name')
     def _onchange_apartados(self):
-        logging.warning("_onchange_apartados")
-        logging.warning("antes de if ")
-        logging.warning(self.seccion_id)
-        logging.warning(self.coleccion_id)
-        logging.warning(self.departamento_id)
-        logging.warning(self._origin)
-        logging.warning(self._origin.id)
         if self.seccion_id and self.departamento_id and self.name:
             corrida_id = self._origin
             dominio = [('id', '!=', corrida_id.id),('seccion_id','=',self.seccion_id.id),('departamento_id','=', self.departamento_id.id), ('name','=', self.name)]
-            logging.warning('dominio')
-            logging.warning(dominio)
-            logging.warning(self.env['prada.corrida'].search_count(dominio))
             if self.env['prada.corrida'].search_count(dominio):
                 raise ValidationError(_('Corrida repetida'))
 
@@ -609,16 +640,12 @@ class PradaPimLine(models.Model):
         if not self.producto_id:
             return
 
-        logging.warning(self.eco_id._origin.id)
         eco_id = self.eco_id._origin.id
         dominio = [('eco_id', '=', eco_id),('producto_id','=',self.producto_id.id)]
-        logging.warning('onchange producto')
-        logging.warning(self.env['prada.pim.line'].search_count(dominio))
         if self.producto_id and self.codigo_prada:
             self.producto_id.default_code = self.codigo_prada
         if self.env['prada.pim.line'].search_count(dominio):
             raise ValidationError(_('Producto repetido'))
-
     
     @api.depends('producto_id','silueta_id', 'color_id', 'atributo_especial', 'ocasion_id', 'atributo1_id', 'medidas')
     def _compute_bullet(self):
@@ -637,27 +664,11 @@ class PradaPimLine(models.Model):
     def _compute_columnas(self):
         for linea in self:
             total_eur = 0
-            # if linea.seccion_id and linea.corrida > 0:
-            #     corrida_id = self.env['prada.corrida'].search([('seccion_id','=',linea.seccion_id.id),('departamento_id','=',linea.departamento_id.id),('coleccion_id','=',linea.coleccion_id.id),('name','=',str(int(linea.corrida)))])
             corrida_id = linea.corrida_id
             if corrida_id:
                 totalu = corrida_id.talla + corrida_id.columna1 + corrida_id.columna2 + corrida_id.columna3 + corrida_id.columna4 + corrida_id.columna5 + corrida_id.columna6 + corrida_id.columna7 + corrida_id.columna8 + corrida_id.columna9 + corrida_id.columna10 + corrida_id.columna11
                 linea.totalu = totalu
-                    # linea.talla = corrida_id.talla
-                    # linea.columna1 = corrida_id.columna1
-                    # linea.columna2 = corrida_id.columna2
-                    # linea.columna3 = corrida_id.columna3
-                    # linea.columna4 = corrida_id.columna4
-                    # linea.columna5 = corrida_id.columna5
-                    # linea.columna6 = corrida_id.columna6
-                    # linea.columna7 = corrida_id.columna7
-                    # linea.columna8 = corrida_id.columna8
-                    # linea.columna9 = corrida_id.columna9
-                    # linea.columna10 = corrida_id.columna10
-                    # linea.columna11 = corrida_id.columna11
-                    
-            #         total_eur = corrida.total * linea.costo
-            # linea.total_eur = total_eur
+
 
     @api.depends('corrida_id')
     def _compute_valores(self):
@@ -686,7 +697,6 @@ class PradaPimLine(models.Model):
             linea.corrida_id = False
 
     def create(self, vals):
-        _logger.warning("Create called with vals: %s", vals)
         productos_repetidos = {}
         if len(vals) > 1:
             for v in vals:
@@ -700,152 +710,6 @@ class PradaPimLine(models.Model):
                     if productos_repetidos[p] > 1:
                         raise ValidationError(_('Producto repetido'))
                         
-    
-        # def check_group(fields, groups, error="You do not have permission to edit this field."):
-        #     if any(field in vals for field in fields):
-        #         if not all(self.env.user.has_group(group) for group in groups):
-        #             raise AccessError(error)
-    
-        # check_group(
-        #     ['comentarios_compras', 'mes_entrega', 'mes_recibo_tienda'],
-        #     ['prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['corridas_prepedido', 'corrida'],
-        #     ['prada.prada_compras', 'prada.prada_compras_planeacion']
-        # )
-    
-        # check_group(
-        #     [
-        #         'temp', 'proveedor_id', 'marca_id', 'modelo', 'departamento_id', 'seccion_id', 'silueta_id', 'horma','horma_id',
-        #         'material_id', 'color_id', 'atributo1_id', 'atributo2_id', 'ocasion_id', 'no_juego', 'juego1',
-        #         'juego2', 'juego3', 'categoria_id', 'tendencia_id', 'coleccion_id', 'tienda_id', 'troquel_id',
-        #         'medidas', 'tipo_punta', 'tipo_fijacion', 'comentarios_producto_compra_es',
-        #         'comentarios_p1_revision_mx', 'comentarios_p2_revision_mx', 'comentarios_producto_llegada_mx',
-        #         'cuidados_producto', 'atributo_especial', 'estatus_muestra_marketing_id'
-        #     ],
-        #     ['prada.prada_compras', 'prada.prada_compras_producto']
-        # )
-    
-        # check_group(
-        #     ['apuntes_getoria_compra_es', 'revision_es_antes_vuelo'],
-        #     ['prada.prada_gestoria']
-        # )
-    
-        # check_group(
-        #     ['costo'],
-        #     ['prada.prada_gestoria', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['fecha_vuelo_muestras', 'estatus_muestra_importaciones', 'fecha_vuelo_produccion', 'estatus_produccion_importacion'],
-        #     ['prada.prada_compras_importaciones', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['titulo', 'descripcion', 'metatitulo', 'metadescripcion', 'titulo_amazon', 'desripcion_amazon', 'bullets_amazon'],
-        #     ['prada.prada_marketing']
-        # )
-    
-        # check_group(
-        #     ['codigo_prada'],
-        #     ['prada.prada_compras_planeacion']
-        # )
-    
-        # check_group(
-        #     ['pvp_comercial', 'pvp_outlet'],
-        #     ['prada.prada_compras_planeacion', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['estatus_muestra_web_id'],
-        #     ['prada.prada_compras_producto', 'prada.prada_compras', 'prada.prada_ecommerce']
-        # )
-    
-        # if 'prada_image' in vals:
-        #     if not all(self.env.user.has_group(g) for g in ['prada.prada_compras_producto', 'prada.prada_marketing', 'prada.prada_ecommerce']):
-        #         raise UserError("You do not have permission to edit this field.")
-        logging.warning("grupo")
-        logging.warning(self.env.user.has_group('prada.prada_admin'))
-        if 'prada_image' in vals:
-            if not any(self.env.user.has_group(g) for g in ['prada.prada_admin','prada.prada_compras_producto', 'prada.prada_marketing', 'prada.prada_ecommerce']):
-                raise UserError("You do not have permission to edit this field.")
-        
         return super().create(vals)
 
 
-    def write(self, vals):
-        # logging.warning("vals write")
-        # logging.warning(vals)
-
-        # logging.warning("permiso")
-        # logging.warning(self.env.user.has_group('prada.prada_compras'))
-        
-        # def check_group(fields, groups, error="You do not have permission to edit this field."):
-        #     if any(field in vals for field in fields):
-        #         if not any(self.env.user.has_group(group) for group in groups):
-        #             raise AccessError(error)
-    
-        # check_group(
-        #     ['comentarios_compras', 'mes_entrega', 'mes_recibo_tienda'],
-        #     ['prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['corridas_prepedido', 'corrida'],
-        #     ['prada.prada_compras', 'prada.prada_compras_planeacion']
-        # )
-    
-        # check_group(
-        #     [
-        #         'temp', 'proveedor_id', 'marca_id', 'modelo', 'departamento_id', 'seccion_id', 'silueta_id', 'horma','horma_id',
-        #         'material_id', 'color_id', 'atributo1_id', 'atributo2_id', 'ocasion_id', 'no_juego', 'juego1',
-        #         'juego2', 'juego3', 'categoria_id', 'tendencia_id', 'coleccion_id', 'tienda_id', 'troquel_id',
-        #         'medidas', 'tipo_punta', 'tipo_fijacion', 'comentarios_producto_compra_es',
-        #         'comentarios_p1_revision_mx', 'comentarios_p2_revision_mx', 'comentarios_producto_llegada_mx',
-        #         'cuidados_producto', 'atributo_especial', 'estatus_muestra_marketing_id'
-        #     ],
-        #     ['prada.prada_compras', 'prada.prada_compras_producto']
-        # )
-    
-        # check_group(
-        #     ['apuntes_getoria_compra_es', 'revision_es_antes_vuelo'],
-        #     ['prada.prada_gestoria']
-        # )
-    
-        # check_group(
-        #     ['costo'],
-        #     ['prada.prada_gestoria', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['fecha_vuelo_muestras', 'estatus_muestra_importaciones', 'fecha_vuelo_produccion', 'estatus_produccion_importacion'],
-        #     ['prada.prada_compras_importaciones', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['titulo', 'descripcion', 'metatitulo', 'metadescripcion', 'titulo_amazon', 'desripcion_amazon', 'bullets_amazon'],
-        #     ['prada.prada_marketing']
-        # )
-    
-        # check_group(
-        #     ['codigo_prada'],
-        #     ['prada.prada_compras_planeacion']
-        # )
-    
-        # check_group(
-        #     ['pvp_comercial', 'pvp_outlet'],
-        #     ['prada.prada_compras_planeacion', 'prada.prada_compras']
-        # )
-    
-        # check_group(
-        #     ['estatus_muestra_web_id'],
-        #     ['prada.prada_compras_producto', 'prada.prada_compras', 'prada.prada_ecommerce']
-        # )
-
-        
-        if 'prada_image' in vals:
-            if not any(self.env.user.has_group(g) for g in ['prada.prada_admin','prada.prada_compras_producto', 'prada.prada_marketing', 'prada.prada_ecommerce']):
-                raise UserError("You do not have permission to edit this field.")
-        return super().write(vals)

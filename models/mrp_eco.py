@@ -1,20 +1,9 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from collections import defaultdict
-from random import randint
-
-import ast
-
-from odoo import api, fields, models, tools, Command, _
-from odoo.osv import expression
-from odoo.exceptions import UserError, ValidationError
-import logging
+from odoo import api, fields, models, _
 
 class MrpEco(models.Model):
     _inherit = 'mrp.eco'
-
-    #importaciones tambien puede editarlo
 
     tipo_cambio = fields.Float('Tipo de cambio',digits=(16, 4), compute = '_calcular_tipo_cambio', store = True, readonly = False)
     gastos = fields.Float('Gastos (%)')
@@ -55,8 +44,7 @@ class MrpEco(models.Model):
             company=self.company_id,
             date=self.fecha,
         )
-        logging.warning('tipo_cambio')
-        logging.warning(tipo_cambio)
+
         self.tipo_cambio = tipo_cambio
         if self.line_ids:
             for linea in self.line_ids:
@@ -68,6 +56,3 @@ class MrpEco(models.Model):
             if pl.line_ids:
                 for linea in self.line_ids:
                     linea._compute_valores()
-                
-
-    
