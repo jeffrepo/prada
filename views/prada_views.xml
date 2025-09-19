@@ -8,10 +8,10 @@
             <field name="arch" type="xml">
                 <list create="0">
                     <field name="prada_image" widget="image" readonly="0"/>
-                    <field name="total_modelos" optional="show" sum="Promedio modelos"/>
-                    <field name="total_costo_promedio" optional="show" sum="Total costo promedio"/>
-                    <field name="total_corrida_promedio" optional="show" sum="Total corrida"/>
-                    <field name="suma_unidades" optional="show" sum="Suma unidades"/>
+                    <field name="total_modelos" optional="show" sum="Suma modelos"/>
+                    <field name="total_costo_promedio" optional="show" avg="Total costo promedio"/>
+                    <field name="total_corrida_promedio" optional="show" avg="Total corrida"/>
+                    <field name="suma_unidades" optional="show" sum="totalu"/>
                     <field name="temp" optional="show"/>
                     <field name="proveedor_id" optional="show"/>
                     <field name="marca_id" optional="show"/>
@@ -1318,6 +1318,18 @@
                 <p class="o_view_nocontent_smiling_face">
                     Crear un proveedor
                 </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_duplicar_pim_line">
+            <field name="name">Duplicar PIM</field>
+            <field name="model_id" ref="prada.model_prada_pim_line"/>
+            <field name="binding_model_id" ref="prada.model_prada_pim_line" />
+            <field name="state">code</field>
+            <field name="binding_view_types">list</field>
+            <field name="code">
+if records:
+    action = records.action_duplicar_pim_line()
             </field>
         </record>
         

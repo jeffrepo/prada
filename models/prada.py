@@ -561,7 +561,7 @@ class PradaPimLine(models.Model):
     columna6 = fields.Float('41', readonly = True, store = True, related='corrida_id.columna6')
     columna7 = fields.Float('42', readonly = True, store = True, related='corrida_id.columna7')
     columna8 = fields.Float('43', readonly = True, store = True, related='corrida_id.columna8')
-    columna9 = fields.Float('44', readonly = True, store = True, related='corrida_id.columna19')
+    columna9 = fields.Float('44', readonly = True, store = True, related='corrida_id.columna9')
     columna10 = fields.Float('45', readonly = True, store = True, related='corrida_id.columna10')
 
     columna12 = fields.Float('46', readonly = True, store = True, related='corrida_id.columna12')
@@ -618,10 +618,13 @@ class PradaPimLine(models.Model):
     desripcion_amazon = fields.Html('DESCRIPCIÓN AMAZON')
     bullets_amazon = fields.Html('BULLETS AMAZON')
     #este campo solo es para prueba al pasar a produccion revisar si se hace o no
-    total_modelos = fields.Integer('TOTAL MODELOS',store=True, related='eco_id.total_modelos') 
-    total_costo_promedio = fields.Float('TOTAL COSTO PROMEDIO',store=True, related='eco_id.total_costo_promedio')
-    total_corrida_promedio = fields.Float('TOTAL CORRIDA PROMEDIO',store=True, related='eco_id.total_corrida_promedio')
-    suma_unidades = fields.Integer('SUMA UNIDADES',store=True, related='eco_id.suma_unidades')
+    #total_modelos = fields.Integer('TOTAL MODELOS',store=True, related='eco_id.total_modelos', group_operator='avg') 
+    total_modelos = fields.Integer('TOTAL MODELOS',store=True, default="1") 
+    #total_costo_promedio = fields.Float('TOTAL COSTO PROMEDIO',store=True, related='eco_id.total_costo_promedio', group_operator='avg')
+    total_costo_promedio = fields.Float('TOTAL COSTO PROMEDIO',store=True, related='costo', group_operator='avg')
+    total_corrida_promedio = fields.Float('TOTAL CORRIDA PROMEDIO',store=True, related='totalu', group_operator='avg')
+    suma_unidades = fields.Integer('SUMA UNIDADES',store=True)
+    #suma_unidades = fields.Many2one('prada.corrida',string='SUMA UNIDADES', related='corrida_id', store=True)
 
     @api.onchange('codigo_prada', 'producto_id')
     def _onchange_codigo_prada(self):
@@ -641,11 +644,15 @@ class PradaPimLine(models.Model):
             return
 
         eco_id = self.eco_id._origin.id
-        dominio = [('eco_id', '=', eco_id),('producto_id','=',self.producto_id.id)]
+        
+        
         if self.producto_id and self.codigo_prada:
             self.producto_id.default_code = self.codigo_prada
-        if self.env['prada.pim.line'].search_count(dominio):
-            raise ValidationError(_('Producto repetido'))
+
+        if self.color_id and self.producto_id:
+            dominio = [('eco_id', '=', eco_id),('producto_id','=',self.producto_id.id),('color_id','=', self.color_id.id)]
+            if self.env['prada.pim.line'].search_count(dominio):
+                raise ValidationError(_('Producto repetido 2'))
     
     @api.depends('producto_id','silueta_id', 'color_id', 'atributo_especial', 'ocasion_id', 'atributo1_id', 'medidas')
     def _compute_bullet(self):
@@ -668,6 +675,7 @@ class PradaPimLine(models.Model):
             if corrida_id:
                 totalu = corrida_id.talla + corrida_id.columna1 + corrida_id.columna2 + corrida_id.columna3 + corrida_id.columna4 + corrida_id.columna5 + corrida_id.columna6 + corrida_id.columna7 + corrida_id.columna8 + corrida_id.columna9 + corrida_id.columna10 + corrida_id.columna11
                 linea.totalu = totalu
+                linea.suma_unidades = int(corrida_id.name)
 
 
     @api.depends('corrida_id')
@@ -684,7 +692,8 @@ class PradaPimLine(models.Model):
             linea.iva = iva
             linea.total_usd =  total_usd
             linea.pvp_calculado = pvp_calculado
-            linea.pvp_comercial = pvp_comercial
+            #linea.pvp_comercial = pvp_comercial
+            linea.pvp_redondeado = pvp_comercial
 
     @api.onchange('producto_id','seccion_id', 'departamento_id', 'coleccion_id')
     def onchannge_producto_id(self):
@@ -713,3 +722,17 @@ class PradaPimLine(models.Model):
         return super().create(vals)
 
 
+    def action_duplicar_pim_line(self):
+        self.ensure_one()  # solo uno a la vez
+        new_record = self.copy(default={
+            'color_id': False,
+            'codigo_prada': '',
+        })
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'prada.pim.line',
+            'view_mode': 'form',
+            'res_id': new_record.id,
+            'target': 'current',
+        }

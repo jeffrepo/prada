@@ -21,7 +21,7 @@
         'views/prada_views.xml',
         'views/product_template_views.xml',
         'wizard/mover_prepedido.xml',
-        'security/prada_security.xml',
+        #'security/prada_security.xml',
     ],
     'license': 'LGPL-3',
 }

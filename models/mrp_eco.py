@@ -14,7 +14,7 @@ class MrpEco(models.Model):
     total_modelos = fields.Integer('Total modelos', compute='_calcular_totales')
     total_costo_promedio = fields.Float('Total costo promedio', compute='_calcular_totales')
     total_corrida_promedio = fields.Float('Total corrida promedio', compute='_calcular_totales')
-    suma_unidades = fields.Integer('Suma unidades', compute='_calcular_totales')
+    suma_unidades = fields.Integer('Suma unidades', compute='_calcular_totales', store= True)
 
     @api.depends('line_ids')
     def _calcular_totales(self):
