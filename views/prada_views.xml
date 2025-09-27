@@ -122,6 +122,7 @@
                         <field name="temp"/>
                         <field name="proveedor_id"/>
                         <field name="marca_id"/>
+                        <field name="url_imagen"/>
                         <field name="codigo_prada"/>
                         <field name="modelo"/>
                         <field name="departamento_id"/>
@@ -1088,7 +1089,7 @@
                                 <field name="columna22"/>
                                 <field name="columna23"/>
                                 <!-- <field name="totalu"/> -->
-                                <field name="total" invisible="1"/>
+                                <field name="total"/>
                             </group>
                         </group>
                     </sheet>

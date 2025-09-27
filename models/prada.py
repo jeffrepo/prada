@@ -2,6 +2,9 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.http import request
+import logging
+_logger = logging.getLogger(__name__)
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -478,7 +481,8 @@ class PradaCorrida(models.Model):
     @api.depends(
         'talla','columna1','columna2','columna3','columna4',
         'columna5','columna6','columna7','columna8','columna9',
-        'columna10','columna11'
+        'columna10','columna11','columna12','columna13','columna14','columna15','columna16',
+        'columna17','columna18','columna19','columna20','columna21','columna22','columna23'
     )
     def _compute_total(self):
         for corrida in self:
@@ -494,7 +498,19 @@ class PradaCorrida(models.Model):
                 (corrida.columna8 or 0) +
                 (corrida.columna9 or 0) +
                 (corrida.columna10 or 0) +
-                (corrida.columna11 or 0)
+                (corrida.columna11 or 0) +
+                (corrida.columna12 or 0) +
+                (corrida.columna13 or 0) +
+                (corrida.columna14 or 0) +
+                (corrida.columna15 or 0) +
+                (corrida.columna16 or 0) +
+                (corrida.columna17 or 0) +
+                (corrida.columna18 or 0) +
+                (corrida.columna19 or 0) +
+                (corrida.columna20 or 0) +
+                (corrida.columna21 or 0) +
+                (corrida.columna22 or 0) +
+                (corrida.columna23 or 0)
             )
 
     @api.depends(
@@ -535,7 +551,7 @@ class PradaPimLine(models.Model):
     #horma_id = fields.Many2one('prada.horma', 'Horma', readonly = False, store = True, related = 'producto_id.horma_id')
     horma = fields.Char('HORMA',related = 'producto_id.horma', readonly = False, store = True)
     material_id = fields.Many2one('prada.material', 'MATERIAL', readonly = False, store = True, related = 'producto_id.material_id')
-    color_id = fields.Many2one('prada.color', 'COLOR', readonly = False, store = True, related = 'producto_id.color_id')
+    color_id = fields.Many2one('prada.color', 'COLOR', readonly = False, store = True)
     atributo1_id = fields.Many2one('prada.atributo1', 'ATRIBUTO 1', readonly = False, store = True, related = 'producto_id.atributo1_id')
     atributo2_id = fields.Many2one('prada.atributo2', 'ATRIBUTO 2', readonly = False, store = True, related = 'producto_id.atributo2_id')
     ocasion_id = fields.Many2one('prada.ocasion', 'OCASIÓN', readonly = False, store = True, related='producto_id.ocasion_id')
@@ -625,6 +641,7 @@ class PradaPimLine(models.Model):
     total_corrida_promedio = fields.Float('TOTAL CORRIDA PROMEDIO',store=True, related='totalu', group_operator='avg')
     suma_unidades = fields.Integer('SUMA UNIDADES',store=True)
     #suma_unidades = fields.Many2one('prada.corrida',string='SUMA UNIDADES', related='corrida_id', store=True)
+    url_imagen = fields.Char("URL imagen", compute='_compute_url_imagen')
 
     @api.onchange('codigo_prada', 'producto_id')
     def _onchange_codigo_prada(self):
@@ -637,22 +654,53 @@ class PradaPimLine(models.Model):
                     'title': _("Note:"),
                     'message': _("Referencia interna ya existe."),
                 }}
+
     
-    @api.onchange('producto_id','codigo_prada')
+    @api.onchange('producto_id', 'modelo', 'color_id')
     def _onchange_producto_id(self):
-        if not self.producto_id:
+        if not (self.producto_id and self.modelo and self.color_id):
             return
+    
+        eco_id = self.eco_id.id or self.eco_id._origin.id if self.eco_id else False
+    
+        _logger.warning("Onchange validando duplicado con:")
+        _logger.warning(f"producto_id={self.producto_id.id}, codigo_prada={self.codigo_prada}, modelo={self.modelo}, color_id={self.color_id.id}, eco_id={eco_id}")
+    
+        domain = [
+            ('producto_id', '=', self.producto_id.id),
+            ('modelo', '=', self.modelo),
+            ('color_id', '=', self.color_id.id),
+            ('eco_id', '=', eco_id)
+        ]
 
-        eco_id = self.eco_id._origin.id
-        
-        
-        if self.producto_id and self.codigo_prada:
-            self.producto_id.default_code = self.codigo_prada
+        if self.id:
+            domain.append(('id', '!=', self.id))
+    
+        duplicates = self.env['prada.pim.line'].search_count(domain)
+    
+        if duplicates:
+            raise ValidationError(_('Ya existe un producto con la misma combinación de producto, código, modelo, color y ECO.'))
 
-        if self.color_id and self.producto_id:
-            dominio = [('eco_id', '=', eco_id),('producto_id','=',self.producto_id.id),('color_id','=', self.color_id.id)]
-            if self.env['prada.pim.line'].search_count(dominio):
-                raise ValidationError(_('Producto repetido 2'))
+
+    
+    # @api.onchange('producto_id','codigo_prada','modelo','color_id')
+    # def _onchange_producto_id(self):
+    #     if not self.producto_id:
+    #         return
+
+    #     eco_id = self.eco_id._origin.id
+
+    #     if self.producto_id.color_id:
+    #         self.color_id = self.producto_id.color_id.id
+    #     if self.producto_id and self.codigo_prada:
+    #         self.producto_id.default_code = self.codigo_prada
+
+    #     if self.color_id and self.producto_id and self.modelo:
+    #         dominio = [('eco_id', '=', eco_id),('producto_id','=',self.producto_id.id),('modelo','=', self.modelo),('color_id','=', self.color_id.id)]
+    #         logging.warning("lines")
+    #         logging.warning(self.env['prada.pim.line'].search(dominio))
+    #         if self.env['prada.pim.line'].search_count(dominio):
+    #             raise ValidationError(_('Producto repetido test'))
     
     @api.depends('producto_id','silueta_id', 'color_id', 'atributo_especial', 'ocasion_id', 'atributo1_id', 'medidas')
     def _compute_bullet(self):
@@ -705,26 +753,32 @@ class PradaPimLine(models.Model):
         for linea in self:
             linea.corrida_id = False
 
-    def create(self, vals):
-        productos_repetidos = {}
-        if len(vals) > 1:
-            for v in vals:
-                producto = v['producto_id']
-                if producto not in productos_repetidos:
-                    productos_repetidos[producto] = 0
-                productos_repetidos[producto] += 1
+    # def create(self, vals):
+    #     productos_repetidos = {}
+    #     if len(vals) > 1:
+    #         for v in vals:
+    #             producto = v['producto_id']
+    #             if producto not in productos_repetidos:
+    #                 productos_repetidos[producto] = 0
+    #             productos_repetidos[producto] += 1
 
-            if len(productos_repetidos) > 0:
-                for p in productos_repetidos:
-                    if productos_repetidos[p] > 1:
-                        raise ValidationError(_('Producto repetido'))
+    #         if len(productos_repetidos) > 0:
+    #             for p in productos_repetidos:
+    #                 if productos_repetidos[p] > 1:
+    #                     raise ValidationError(_('Producto repetido'))
                         
-        return super().create(vals)
+    #     return super().create(vals)
 
 
     def action_duplicar_pim_line(self):
         self.ensure_one()  # solo uno a la vez
-        new_record = self.copy(default={
+        nuevo_producto = self.producto_id.copy(default={
+            'name': self.producto_id.name + ' duplicado',
+            'default_code': '',
+            'color_id': False,
+        })
+        nuevo_pim_linea = self.copy(default={
+            'producto_id': nuevo_producto.id,
             'color_id': False,
             'codigo_prada': '',
         })
@@ -733,6 +787,14 @@ class PradaPimLine(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'prada.pim.line',
             'view_mode': 'form',
-            'res_id': new_record.id,
+            'res_id': nuevo_pim_linea.id,
             'target': 'current',
         }
+
+    def _compute_url_imagen(self):
+        for linea in self:
+            if linea.prada_image:
+                linea.url_imagen = f'{request.httprequest.host_url}/web/image/{linea._name}/{linea.id}/prada_image'
+            else:
+                linea.url_imagen = False
+            
