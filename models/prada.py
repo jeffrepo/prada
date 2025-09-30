@@ -747,28 +747,14 @@ class PradaPimLine(models.Model):
     def onchannge_producto_id(self):
         for linea in self:
             linea.costo = linea.producto_id.standard_price
+            linea.codigo_prada = linea.producto_id.default_code
+            linea.color_id = linea.producto_id.color_id.id if linea.producto_id.color_id else False
+            linea.marca_id = linea.producto_id.marca_id.id if linea.producto_id.marca_id else False
 
     @api.onchange('temp')
     def onchannge_campos_corrida(self):
         for linea in self:
             linea.corrida_id = False
-
-    # def create(self, vals):
-    #     productos_repetidos = {}
-    #     if len(vals) > 1:
-    #         for v in vals:
-    #             producto = v['producto_id']
-    #             if producto not in productos_repetidos:
-    #                 productos_repetidos[producto] = 0
-    #             productos_repetidos[producto] += 1
-
-    #         if len(productos_repetidos) > 0:
-    #             for p in productos_repetidos:
-    #                 if productos_repetidos[p] > 1:
-    #                     raise ValidationError(_('Producto repetido'))
-                        
-    #     return super().create(vals)
-
 
     def action_duplicar_pim_line(self):
         self.ensure_one()  # solo uno a la vez
