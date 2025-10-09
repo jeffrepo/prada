@@ -27,8 +27,8 @@ class MrpEco(models.Model):
             for linea in plm.line_ids:
                 total_modelos += 1
                 promedio += linea.costo
-                corrida += int(linea.corrida_id.name)
-                suma_unidades += int(linea.corrida_id.name)
+                corrida += linea.corrida_id.total
+                suma_unidades += linea.corrida_id.total
     
             plm.total_modelos = total_modelos
             plm.total_costo_promedio = promedio / total_modelos if total_modelos else 0.0

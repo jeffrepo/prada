@@ -730,13 +730,13 @@ class PradaPimLine(models.Model):
             if corrida_id:
                 totalu = corrida_id.talla + corrida_id.columna1 + corrida_id.columna2 + corrida_id.columna3 + corrida_id.columna4 + corrida_id.columna5 + corrida_id.columna6 + corrida_id.columna7 + corrida_id.columna8 + corrida_id.columna9 + corrida_id.columna10 + corrida_id.columna11
                 linea.totalu = totalu
-                linea.suma_unidades = int(corrida_id.name)
+                linea.suma_unidades = corrida_id.total
 
 
     @api.depends('corrida_id')
     def _compute_valores(self):
         for linea in self:
-            total_eur = int(linea.corrida_id.name) * linea.costo
+            total_eur = linea.corrida_id.total * linea.costo
             gastos = total_eur * (linea.eco_id.gastos / 100)
             iva = (total_eur + gastos) * (linea.eco_id.iva / 100)
             total_usd = (total_eur + gastos + iva) * linea.eco_id.tipo_cambio
