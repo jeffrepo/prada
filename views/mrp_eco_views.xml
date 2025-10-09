@@ -85,7 +85,7 @@
                             <field name="comentarios_compras" optional="show"/>
                             <field name="mes_entrega" optional="show"/>
                             <field name="mes_recibo_tienda" optional="show"/>
-                            <field name="cambios_preconfirmacion" optional="show"/>
+                            <field name="cambios_preconfirmacion_id" optional="show"/>
                             <field name="apuntes_getoria_compra_es" optional="show"/>
                             <field name="revision_es_antes_vuelo" optional="show"/>
                             <field name="troquel_id" optional="show"/>

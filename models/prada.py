@@ -440,6 +440,13 @@ class PradaEstadoMarketing(models.Model):
 
     name = fields.Char('Nombre')
 
+
+class PradaCambiosPreconfirmacion(models.Model):
+    _name = 'prada.cambios_preconfirmacion'
+    _description = 'Cambios preconfirmacion'
+
+    name = fields.Char('Nombre')
+
 class PradaCorrida(models.Model):
     _name = 'prada.corrida'
     _description = 'Corrida'
@@ -642,13 +649,7 @@ class PradaPimLine(models.Model):
     suma_unidades = fields.Integer('SUMA UNIDADES',store=True)
     #suma_unidades = fields.Many2one('prada.corrida',string='SUMA UNIDADES', related='corrida_id', store=True)
     url_imagen = fields.Char("URL imagen", compute='_compute_url_imagen')
-    #cambios_preconfirmacion_id = fields.Many2one('prada.cambios_preconfirmacion', 'CAMBIOS PRECONFIRMACIÓN')
-    cambios_preconfirmacion = fields.Selection([('silueta', 'CAMBIOS SILUETA'), 
-                                               ('material', 'CAMBIOS MATERIAL'),
-                                               ('color', 'CAMBIOS COLOR'),
-                                               ('horma', 'CAMBIOS HORMA'),
-                                              ('juego', 'CAMBIOS NO. JUEGO')], string='CAMBIOS PRECONFIRMACION')
-
+    cambios_preconfirmacion_id = fields.Many2one('prada.cambios_preconfirmacion', 'CAMBIOS PRECONFIRMACIÓN')
 
     @api.onchange('codigo_prada', 'producto_id')
     def _onchange_codigo_prada(self):
