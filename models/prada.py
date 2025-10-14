@@ -44,7 +44,7 @@ class PradaCategoria(models.Model):
 class PradaTemp(models.Model):
     _name = 'prada.temp'
     _description = 'Temp'
-    
+
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
 
@@ -62,7 +62,7 @@ class PradaMarca(models.Model):
     _name = 'prada.marca'
     _rec_name = 'name'
     _description = 'Marca'
-    
+
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
     complete_name = fields.Char(
@@ -91,7 +91,7 @@ class PradaDepartamento(models.Model):
     _name = 'prada.departamento'
     _rec_name = 'clave'
     _description = 'Departamento'
-    
+
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
     complete_name = fields.Char(
@@ -120,7 +120,7 @@ class PradaSeccion(models.Model):
     _name = 'prada.seccion'
     _rec_name = 'clave'
     _description = 'Seccion'
-    
+
     name = fields.Char('Nombre')
     clave = fields.Char('Clave')
     complete_name = fields.Char(
@@ -249,7 +249,7 @@ class PradaAtributo1(models.Model):
     complete_name = fields.Char(
         'Complete Name', compute='_compute_complete_name', recursive=True,
         store=True)
-    
+
     @api.depends('name', 'clave')
     def _compute_complete_name(self):
         for objeto in self:
@@ -480,7 +480,7 @@ class PradaCorrida(models.Model):
     columna21 = fields.Float('120')
     columna22 = fields.Float('GD')
     columna23 = fields.Float('MD')
-    
+
     columna11 = fields.Float('UNI')
     totalu = fields.Float('TotalU', compute='_compute_totalu')
     total = fields.Float('Total',store = True ,compute='_compute_total')
@@ -531,11 +531,11 @@ class PradaCorrida(models.Model):
 
 
 
-    @api.onchange('seccion_id','departamento_id','name')
+    @api.onchange('seccion_id','departamento_id','name', 'coleccion_id', 'temp')
     def _onchange_apartados(self):
         if self.seccion_id and self.departamento_id and self.name:
             corrida_id = self._origin
-            dominio = [('id', '!=', corrida_id.id),('seccion_id','=',self.seccion_id.id),('departamento_id','=', self.departamento_id.id), ('name','=', self.name)]
+            dominio = [('id', '!=', corrida_id.id),('seccion_id','=',self.seccion_id.id),('departamento_id','=', self.departamento_id.id), ('name','=', self.name),('coleccion_id','=', self.coleccion_id.id),('temp','=', self.temp.id)]
             if self.env['prada.corrida'].search_count(dominio):
                 raise ValidationError(_('Corrida repetida'))
 
@@ -600,12 +600,12 @@ class PradaPimLine(models.Model):
     columna11 = fields.Float('UNI', readonly = True, store = True, related='corrida_id.columna11')
     columna22 = fields.Float('GD', readonly = True, store = True, related='corrida_id.columna22')
     columna23 = fields.Float('MD', readonly = True, store = True, related='corrida_id.columna23')
-    
+
     totalu = fields.Float('TOTAL U', readonly = True, store = True, compute='_compute_columnas')
     total_eur = fields.Float('TOTAL EUR', readonly = True, store = True, compute = '_compute_valores')
     gastos = fields.Float('GASTOS')
     iva = fields.Float('IVA')
-    
+
     total_usd = fields.Float('TOTAL $')
     pvp_calculado = fields.Float('PVP CALCULADO')
     pvp_redondeado = fields.Float('PVP REDONDEADO')
@@ -641,8 +641,8 @@ class PradaPimLine(models.Model):
     desripcion_amazon = fields.Html('DESCRIPCIÓN AMAZON')
     bullets_amazon = fields.Html('BULLETS AMAZON')
     #este campo solo es para prueba al pasar a produccion revisar si se hace o no
-    #total_modelos = fields.Integer('TOTAL MODELOS',store=True, related='eco_id.total_modelos', group_operator='avg') 
-    total_modelos = fields.Integer('TOTAL MODELOS',store=True, default="1") 
+    #total_modelos = fields.Integer('TOTAL MODELOS',store=True, related='eco_id.total_modelos', group_operator='avg')
+    total_modelos = fields.Integer('TOTAL MODELOS',store=True, default="1")
     #total_costo_promedio = fields.Float('TOTAL COSTO PROMEDIO',store=True, related='eco_id.total_costo_promedio', group_operator='avg')
     total_costo_promedio = fields.Float('TOTAL COSTO PROMEDIO',store=True, related='costo', group_operator='avg')
     total_corrida_promedio = fields.Float('TOTAL CORRIDA PROMEDIO',store=True, related='totalu', group_operator='avg')
@@ -663,17 +663,17 @@ class PradaPimLine(models.Model):
                     'message': _("Referencia interna ya existe."),
                 }}
 
-    
+
     @api.onchange('producto_id', 'modelo', 'color_id')
     def _onchange_producto_id(self):
         if not (self.producto_id and self.modelo and self.color_id):
             return
-    
+
         eco_id = self.eco_id.id or self.eco_id._origin.id if self.eco_id else False
-    
+
         _logger.warning("Onchange validando duplicado con:")
         _logger.warning(f"producto_id={self.producto_id.id}, codigo_prada={self.codigo_prada}, modelo={self.modelo}, color_id={self.color_id.id}, eco_id={eco_id}")
-    
+
         domain = [
             ('producto_id', '=', self.producto_id.id),
             ('modelo', '=', self.modelo),
@@ -683,14 +683,14 @@ class PradaPimLine(models.Model):
 
         if self.id:
             domain.append(('id', '!=', self.id))
-    
+
         duplicates = self.env['prada.pim.line'].search_count(domain)
-    
+
         if duplicates:
             raise ValidationError(_('Ya existe un producto con la misma combinación de producto, código, modelo, color y ECO.'))
 
 
-    
+
     # @api.onchange('producto_id','codigo_prada','modelo','color_id')
     # def _onchange_producto_id(self):
     #     if not self.producto_id:
@@ -709,7 +709,7 @@ class PradaPimLine(models.Model):
     #         logging.warning(self.env['prada.pim.line'].search(dominio))
     #         if self.env['prada.pim.line'].search_count(dominio):
     #             raise ValidationError(_('Producto repetido test'))
-    
+
     @api.depends('producto_id','silueta_id', 'color_id', 'atributo_especial', 'ocasion_id', 'atributo1_id', 'medidas')
     def _compute_bullet(self):
         for linea in self:
@@ -721,8 +721,8 @@ class PradaPimLine(models.Model):
             medidas = linea.medidas if linea.medidas else ''
             bullet = 'SILUETA: '+silueta + ' COLOR: '+color+ ' ATRIBUTO ESPECIAL: ' +atributo_especial+ ' OCASION: ' +ocasion+ ' ATRIBUTO1: ' +atributo1+ ' MEDIDAS: ' + medidas
             linea.bullets = bullet
-            
-    
+
+
     @api.depends('seccion_id','corrida_id','coleccion_id')
     def _compute_columnas(self):
         for linea in self:
@@ -791,4 +791,3 @@ class PradaPimLine(models.Model):
                 linea.url_imagen = f'{request.httprequest.host_url}/web/image/{linea._name}/{linea.id}/prada_image'
             else:
                 linea.url_imagen = False
-            
